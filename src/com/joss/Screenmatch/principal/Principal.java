@@ -79,5 +79,15 @@ public class Principal {
 
 * Se pueden sobreescribir todos los metodos de objet
 *
+*
+* Api: Es una interfaz de programación de aplicaciones que nos
+* permite interactuar con servicios web y obtener datos de manera
+* estructurada
+*
+* Metodos HTTP
+* GET POST PUT DELETE
+*
+*
+*
 * */
 
