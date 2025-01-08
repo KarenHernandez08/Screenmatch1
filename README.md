@@ -88,3 +88,40 @@ try {
 
 ### Identación
 ``ctrl`` + ``shift`` + `i`
+
+## Java.io
+
+proporciona clases e interfaces para entrada y salida de datos en diversos formatos, como archivos, red, teclado, entre otros. 
+
+### La clase File
+La clase File representa un archivo o directorio en el sistema de archivos de la computadora, lo que le permite crear, eliminar, listar y manipular archivos y directorios. Para crear un objeto File, debe pasar la ruta del archivo o directorio como argumento al constructor. Por ejemplo:
+
+```java
+File file = new File("C:\\miArchivo.txt");
+```
+
+### La clase FileReader y FileWriter
+
+Las clases FileReader y FileWriter se utilizan para leer y escribir datos en archivos de texto; la clase FileReader lee caracteres de un archivo de texto, mientras que la clase FileWriter escribe los caracteres.
+
+Para usar la clase FileReader, necesita crear un objeto FileReader pasando un objeto File como argumento, que contenga la ruta del archivo que quieres leer. Luego puede leer los datos del archivo usando el método read() o read(char[]). Por ejemplo:
+
+````java
+//Filereader
+File file = new File("C:\\miArchivo.txt");
+FileReader reader = new FileReader(file);
+
+int data = reader.read();
+while (data != -1) {
+        System.out.print((char) data);
+data = reader.read();
+}
+        reader.close();
+
+
+//FileWriter
+File file = new File("C:\\salida.txt");
+FileWriter writer = new FileWriter(file);
+writer.write("Hola mundo!");
+writer.close();
+````
