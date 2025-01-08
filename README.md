@@ -47,3 +47,41 @@ códigos van del 100 al 599 y se dividen en 5 clases:
 * 3xx: redirección
 * 4xx: error del cliente
 * 5xx: error del servidor
+
+## Exceptions en java
+
+Todas las excepciones son subclases de la clase ``Throwable``
+
+Las excepciones que heredan de la clase Exception se denominan ``excepciones
+verificadas`` (checked exceptions). Esto significa que estas excepciones deben 
+ser tratadas explícitamente en un bloque try-catch o declaradas en una cláusula 
+throws en la firma del método (luego de los paréntesis de los parámetros y antes 
+de las llaves). Un ejemplo es la clase ``IOException``, que indica un problema relacionado 
+con la lectura/escritura de datos.
+
+### Multi catch
+
+En lugar de tener varios bloques catch para manejar diferentes excepciones, 
+puede agruparlos en un solo bloque usando el caracter ``|`` para separar las 
+excepciones. 
+
+```java
+try {
+    metodoQuePuedeLanzarUnaExcepcion();
+} catch (NumberFormatException e) {
+    System.out.println("tratando error...");
+} catch (IllegalArgumentException e) {
+    System.out.println("tratando error...");
+}
+```
+
+Como el tratamiento del error es el mismo para ambas excepciones, 
+el código anterior podría haberse escrito usando multi-catch:
+
+```java
+try {
+    metodoQuePuedeLanzarUnaExcepcion();
+} catch (NullPointerException | IllegalArgumentException e) {
+    System.out.println("tratando error...");
+}
+```

@@ -20,35 +20,41 @@ public class PrincipalConBusqueda {
         var busqueda = lectura.nextLine();
 
         String direccion = "https://www.omdbapi.com/?t=" + busqueda + "&apikey=2825d5cb";
+        try{
+            // Cliente- Servidor
+            HttpClient client = HttpClient.newHttpClient();
+            // Lo que nosotros queremos obtener
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(direccion))
+                    .build();
 
-        // Cliente- Servidor
-        HttpClient client = HttpClient.newHttpClient();
-        // Lo que nosotros queremos obtener
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(direccion))
-                .build();
+            HttpResponse<String> response = client
+                    .send(request, HttpResponse.BodyHandlers.ofString());
 
-        HttpResponse<String> response = client
-                .send(request, HttpResponse.BodyHandlers.ofString());
+            String json = response.body();
+            System.out.println(json);
 
-        String json = response.body();
-        System.out.println(json);
+            Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                    .create();
+            //Titulo miTitulo = gson.fromJson(json, Titulo.class);
+            TituloOmdb miTituloOmdb = gson.fromJson(json, TituloOmdb.class);
+            System.out.println("Titulo: " + miTituloOmdb);
 
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-                .create();
-        //Titulo miTitulo = gson.fromJson(json, Titulo.class);
-        TituloOmdb miTituloOmdb = gson.fromJson(json, TituloOmdb.class);
-        System.out.println("Titulo: " + miTituloOmdb);
-        Titulo miTitulo = new Titulo(miTituloOmdb);
-        System.out.println(miTitulo);
+            Titulo miTitulo = new Titulo(miTituloOmdb);
+            System.out.println("Titulo ya convertido "+miTitulo);
+        }
+        catch (Exception e) {
+            System.out.println("Ocurrio un error");
+            System.out.println(e.getMessage());//para el mensaje del error
+        }
 
-
+        System.out.println("Finalizo la ejecución del programa");
     }
 }
 
 /*
-* Gson se descargo de mvn repository
-*
-*
-* */
+ * Gson se descargo de mvn repository
+ *
+ *
+ * */
