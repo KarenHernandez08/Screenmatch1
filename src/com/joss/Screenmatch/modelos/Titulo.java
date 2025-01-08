@@ -1,12 +1,15 @@
 package com.joss.Screenmatch.modelos;
 
+import com.google.gson.annotations.SerializedName;
 import com.joss.Screenmatch.calculos.Clasificacion;
 
 import javax.swing.plaf.BorderUIResource;
 import java.io.Serializable;
 
 public class Titulo implements Comparable<Titulo> {
+    @SerializedName("Title")
     private String nombre;
+    @SerializedName("Year")
     private int fechaDeLanzamiento;
     private int duracionEnMinutos;
     private boolean incluidoEnElPlan;
@@ -73,5 +76,11 @@ public class Titulo implements Comparable<Titulo> {
     public double calculaMedia(){
 
         return sumaDeLasEvaluaciones / totalDelasEvaluaciones;
+    }
+
+    @Override
+    public String toString() {
+        return "nombre= '" + nombre + '\'' +
+                ", fechaDeLanzamiento= " + fechaDeLanzamiento ;
     }
 }
