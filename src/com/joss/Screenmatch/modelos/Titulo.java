@@ -7,9 +7,9 @@ import javax.swing.plaf.BorderUIResource;
 import java.io.Serializable;
 
 public class Titulo implements Comparable<Titulo> {
-    @SerializedName("Title")
+    //@SerializedName("Title")
     private String nombre;
-    @SerializedName("Year")
+    //@SerializedName("Year")
     private int fechaDeLanzamiento;
     private int duracionEnMinutos;
     private boolean incluidoEnElPlan;
@@ -19,6 +19,13 @@ public class Titulo implements Comparable<Titulo> {
     public Titulo(String nombre, int fechaDeLanzamiento) {
         this.nombre = nombre;
         this.fechaDeLanzamiento = fechaDeLanzamiento;
+    }
+
+    public Titulo(TituloOmdb miTituloOmdb) {
+        this.nombre = miTituloOmdb.title();
+        this.fechaDeLanzamiento = Integer.valueOf(miTituloOmdb.year());
+        this.duracionEnMinutos = Integer.valueOf(miTituloOmdb.runtime().substring(0,3));
+
     }
 
     public int compareTo (Titulo otroTitulo){
@@ -81,6 +88,7 @@ public class Titulo implements Comparable<Titulo> {
     @Override
     public String toString() {
         return "nombre= '" + nombre + '\'' +
-                ", fechaDeLanzamiento= " + fechaDeLanzamiento ;
+                ", fechaDeLanzamiento= " + fechaDeLanzamiento +
+                ", duracionEnMinutos= " + duracionEnMinutos;
     }
 }
